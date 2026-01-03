@@ -1,6 +1,6 @@
 import "./styles.css";
 import "./template.html";
-import  { createHeader, sidebar }  from "./layout.js";
+import  { createHeader, createSidebar }  from "./layout.js";
 
 createHeader();
-sidebar();
+createSidebar();

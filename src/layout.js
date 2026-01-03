@@ -26,11 +26,36 @@ export function createHeader() {
 
     header.append(h1Header, div);
 
-    container.append(header);
+    container.appendChild(header);
 
     return header;
 };
 
-export function sidebar() {
-    
+export function createSidebar() {
+    const sidebar = document.createElement("section");
+    sidebar.classList.add("sidebar-class");
+
+    const divToDo = document.createElement("div");
+    divToDo.classList.add("to-do-section");
+    divToDo.textContent = "To-do section";
+
+    const toDo = document.createElement("div");
+    toDo.classList.add("to-do-class");
+    toDo.textContent = "some todo";
+
+    const divProject = document.createElement("div");
+    divProject.classList.add("project-section");
+    divProject.textContent = "Project section";
+
+    const project = document.createElement("div");
+    project.classList.add("project-class");
+    project.textContent = "some project";
+
+    divToDo.append(toDo);
+    divProject.append(project);
+
+    sidebar.append(divToDo, divProject);
+    container.appendChild(sidebar);
+
+    return sidebar;
 }
