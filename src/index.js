@@ -1,4 +1,6 @@
 import "./styles.css";
-import { hello } from "./num1.js";
+import "./template.html";
+import  { createHeader, sidebar }  from "./layout.js";
 
-console.log(hello);
+createHeader();
+sidebar();

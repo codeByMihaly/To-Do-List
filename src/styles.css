@@ -1,0 +1,24 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+#container {
+    display: grid;
+    grid-template-columns: repeat(3fr);
+}
+
+.header-class {
+   background-color: aqua;
+}
+
+.header-div {
+    display: flex;
+}
+
+#header-icon {
+    width: 75px;
+}
