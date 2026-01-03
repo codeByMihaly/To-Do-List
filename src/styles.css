@@ -8,11 +8,15 @@ body {
 
 #container {
     display: grid;
-    grid-template-columns: repeat(3fr);
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-rows: repeat(3fr);
+    height: 100vh;
 }
 
 .header-class {
-   background-color: aqua;
+    grid-area: 1/1/2/4; 
+    background-color: aqua;
+    
 }
 
 .header-div {
@@ -21,4 +25,21 @@ body {
 
 #header-icon {
     width: 75px;
+}
+
+.sidebar-class {
+    grid-area: 2/1/4/2;
+    background-color: blue; 
+}
+
+.main-class {
+    grid-area: 2/2/4/4;
+    background-color: blueviolet;
+  
+}
+
+.footer-class {
+    grid-area: 4/1/5/4;
+    background-color: brown;
+   ;
 }
