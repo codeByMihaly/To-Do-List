@@ -47,12 +47,29 @@ body {
 
 .content-box {
     border: 1px solid black;
-    width: 10em;
-    height: 10em;
+    min-width: 15em;
+    min-height: 15em;
     margin: 1em;
 }
 
-#footer-text-id {
+.upper-to-do-part {
+    display: flex;
+}
+
+#priority-to-do {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: green;
+
+}
+
+#delete-to-do-button {
+    width: 15px;
+    height: 15px;
+}
+
+#footer-text {
     position: absolute;
     bottom: 0;
 }
