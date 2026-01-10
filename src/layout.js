@@ -51,10 +51,14 @@ export function createSidebar() {
     project.classList.add("project-class");
     project.textContent = "some project";
 
+    const footerText = document.createElement("p");
+    footerText.id = "footer-text-id";
+    footerText.textContent = "CodeByMihaly";
+
     divToDo.append(toDo);
     divProject.append(project);
 
-    sidebar.append(divToDo, divProject);
+    sidebar.append(divToDo, divProject, footerText);
     container.appendChild(sidebar);
 
     return sidebar;
@@ -90,19 +94,4 @@ export function createMain() {
     container.appendChild(main);
 
     return main;
-}
-
-export function createFooter() {
-    const footer = document.createElement("footer");
-    footer.classList.add("footer-class");
-
-    const footerPara = document.createElement("p");
-    footerPara.id = "footer-para-id";
-    footerPara.textContent = "CodeByMihaly";
-
-    footer.appendChild(footerPara);
-
-    container.appendChild(footer);
-
-    return footer;
 }

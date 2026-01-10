@@ -9,13 +9,15 @@ body {
 #container {
     display: grid;
     grid-template-columns: minmax(200px, 0.5fr) 4fr;
-    grid-template-rows: 200px 1fr 1fr 60px;
+    grid-template-rows: 200px 10px 1fr 60px;
     height: 100vh;
 }
 
 .header-class {
-    grid-area: 1/1/2/4; 
-    background-color: aqua;  
+    grid-area: 1/1/2/3; 
+    background-color: rgb(255, 255, 255);  
+    border-bottom: 2px solid rgba(10, 10, 8, 0.301);
+ 
 }
 
 .header-div {
@@ -27,16 +29,30 @@ body {
 }
 
 .sidebar-class {
-    grid-area: 2/1/4/2;
-    background-color: blue; 
+    grid-area: 2/1/5/2;
+    position: relative;
+    background-color: rgb(238, 232, 172);  
+    border-right: 2px solid rgba(133, 133, 104, 0.301);
 }
 
 .main-class {
     grid-area: 2/2/4/4;
-    background-color: blueviolet;
+    background-color: rgb(255, 255, 255); 
 }
 
-.footer-class {
-    grid-area: 4/1/5/4;
-    background-color: brown;
+.content {
+    display: flex;
+    gap: 2em;
+}
+
+.content-box {
+    border: 1px solid black;
+    width: 10em;
+    height: 10em;
+    margin: 1em;
+}
+
+#footer-text-id {
+    position: absolute;
+    bottom: 0;
 }
