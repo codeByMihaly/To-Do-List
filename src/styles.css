@@ -50,6 +50,12 @@ body {
     min-width: 15em;
     min-height: 15em;
     margin: 1em;
+    background-color:rgba(238, 232, 172, 0.342);
+    transition: all 0.2s ease-in;  
+}
+
+.content-box:hover {
+    background-color:rgb(238, 232, 172);  
 }
 
 .upper-to-do-part {
@@ -61,7 +67,6 @@ body {
     height: 15px;
     border-radius: 50%;
     background-color: green;
-
 }
 
 #delete-to-do-button {
