@@ -1,71 +1,9 @@
-import snail from "./icons/snail.png";
 import trash from "./icons/trash-can.png";
-    
-const container = document.getElementById("container");
 
-export function createHeader() {
-    const header = document.createElement("header");
-    header.classList.add("header-class");
+const createMain= () => {
 
-    const h1Header = document.createElement("h1");
-    h1Header.id = "header-h1-id";
-    h1Header.textContent = "Your To Do List";
+    const container = document.getElementById("container");
 
-    const div = document.createElement("div");
-    div.classList.add("header-div");
-
-    const headerIcon = document.createElement("img");
-    headerIcon.src = snail;
-    headerIcon.alt = "Icon";
-    headerIcon.id = "header-icon";
-
-    const username = document.createElement("h3");
-    username.id = "username-id";
-    username.textContent = "Type your name here!";
-
-    div.append(headerIcon, username);
-
-    header.append(h1Header, div);
-
-    container.appendChild(header);
-
-    return header;
-};
-
-export function createSidebar() {
-    const sidebar = document.createElement("section");
-    sidebar.classList.add("sidebar-class");
-
-    const divToDo = document.createElement("div");
-    divToDo.classList.add("to-do-section");
-    divToDo.textContent = "To-do section";
-
-    const toDo = document.createElement("div");
-    toDo.classList.add("to-do-class");
-    toDo.textContent = "some todo";
-
-    const divProject = document.createElement("div");
-    divProject.classList.add("project-section");
-    divProject.textContent = "Project section";
-
-    const project = document.createElement("div");
-    project.classList.add("project-class");
-    project.textContent = "some project";
-
-    const footerText = document.createElement("p");
-    footerText.id = "footer-text";
-    footerText.textContent = "CodeByMihaly";
-
-    divToDo.append(toDo);
-    divProject.append(project);
-
-    sidebar.append(divToDo, divProject, footerText);
-    container.appendChild(sidebar);
-
-    return sidebar;
-}
-
-export function createMain() {
     const main = document.createElement("main");
     main.classList.add("main-class");
 
@@ -91,13 +29,13 @@ export function createMain() {
 
     const titleContent = document.createElement("p");
     titleContent.id = "title-to-do"
-    titleContent.textContent = "Title:";
+    titleContent.textContent = "Title: ";
     const descriptionContent = document.createElement("p");
-    descriptionContent.id = "description.to-do";
-    descriptionContent.textContent = "Description:";
+    descriptionContent.id = "description-to-do";
+    descriptionContent.textContent = "Description: ";
     const dueDateContent = document.createElement("p");
     dueDateContent.id = "due-date-to-do";
-    dueDateContent.textContent = "Due Date:";
+    dueDateContent.textContent = "Due Date: ";
 
     const bottomToDoPart = document.createElement("div");
     bottomToDoPart.classList.add("bottom-to-do-part");
@@ -108,7 +46,7 @@ export function createMain() {
 
     const doneToDoButton = document.createElement("button");
     doneToDoButton.id = "done-to-do-button";
-    doneToDoButton.textContent = "Done";
+    doneToDoButton.textContent = "In progress";
 
     upperToDoPart.append(priority, deleteToDoButton);
 
@@ -142,3 +80,5 @@ export function createMain() {
 
     return main;
 }
+
+export default createMain;
