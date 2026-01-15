@@ -1,33 +1,3 @@
-export const deleteToDo = () => {
-
-    const deleteToDoButton = document.getElementById("delete-to-do-button");
-    const contentBox1 = document.querySelector(".content-box");
-
-    if (deleteToDoButton && contentBox1) {
-        deleteToDoButton.addEventListener("click", () => {
-            contentBox1.remove();
-        });
-    }
-}
-
-export const doneToggle = () => {
-
-    const doneToDoButton = document.getElementById("done-to-do-button");
-
-    doneToDoButton.addEventListener("click", () => {
-
-        if (doneToDoButton.textContent === "In progress") {
-            doneToDoButton.textContent = "Done";
-            doneToDoButton.style.backgroundColor = "green";
-            
-        } else if (doneToDoButton.textContent === "Done") {
-        doneToDoButton.textContent = "In progress";
-        doneToDoButton.style.backgroundColor = "black";
-        }
-        
-    })
-}
-
 export const priorityFormToggle = (color = "green") => {
 
     const priorityForm = document.getElementById("priority-form");
@@ -62,5 +32,4 @@ export const toDoFormX = () => {
       formLayout.remove();
       });
     }
-
 }

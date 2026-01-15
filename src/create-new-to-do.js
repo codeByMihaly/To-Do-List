@@ -1,30 +1,30 @@
+import { createToDoCard } from "./create-card.js";
+
 const addToDo = () => {
-    
     const toDoAddBtn = document.getElementById("to-do-add-btn");
-    const toDoTitle = document.getElementById("title");
-    const toDoDescription = document.getElementById("description");
-    const toDoDueDate = document.getElementById("due-date");
-    const toDoPriority = document.getElementById("priority-form");
 
-    const priorityContent = document.getElementById("priority-to-do");
-    const titleContent = document.getElementById("title-to-do");
-    const descriptionContent = document.getElementById("description-to-do");
-    const dueDateContent = document.getElementById("due-date-to-do");
+    if (!toDoAddBtn) return;
 
+    toDoAddBtn.addEventListener("click", (e) => {
+        e.preventDefault();
 
+        const toDoTitle = document.getElementById("title");
+        const toDoDescription = document.getElementById("description");
+        const toDoDueDate = document.getElementById("due-date");
+        const toDoPriority = document.getElementById("priority-form");
 
-    if(toDoAddBtn && toDoTitle && toDoDescription && toDoDueDate && toDoPriority) {
-        toDoAddBtn.addEventListener("click", (e) => {
-            e.preventDefault();
+        const contentContainer = document.querySelector(".content");
+        if (!contentContainer) return;
 
-            titleContent.textContent = `Title: ${toDoTitle.value}`;
-            descriptionContent.textContent = `Description: ${toDoDescription.value}`;
-            dueDateContent.textContent = `Due Date: ${toDoDueDate.value}`;
-            priorityContent.style.backgroundColor = toDoPriority.style.backgroundColor;
+        const newCard = createToDoCard(
+            toDoTitle.value,
+            toDoDescription.value,
+            toDoDueDate.value,
+            toDoPriority.style.backgroundColor || "green"
+        );
 
-         })
-        }
-       
-}
+        contentContainer.appendChild(newCard);
+    });
+};
 
 export default addToDo;
