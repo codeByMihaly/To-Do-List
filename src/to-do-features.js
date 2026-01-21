@@ -1,3 +1,5 @@
+import toDoForm from "./add-to-do-form.js";
+
 export const priorityFormToggle = (color = "green") => {
 
     const priorityForm = document.getElementById("priority-form");
@@ -32,4 +34,16 @@ export const toDoFormX = () => {
       formLayout.remove();
       });
     }
+}
+
+export const openAddNewToDo = () => {
+
+    const openToDo = document.getElementById("plus-svg-icon-id");
+
+    if(openToDo) {
+        openToDo.addEventListener("click", () => {
+            toDoForm();
+        })
+    }
+
 }

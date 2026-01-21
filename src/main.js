@@ -9,17 +9,14 @@ const createMain = () => {
     const content = document.createElement("div");
     content.classList.add("content");
 
-    const svgContainer = document.createElement("div");
-    svgContainer.classList.add("svg-container");
     const svg = document.createElement("div");
+    svg.id = "plus-svg-icon-id";
     svg.classList.add("plus-svg-icon");
     svg.innerHTML = plusIcon; 
 
-    svgContainer.appendChild(svg);
-    content.appendChild(svgContainer);
+    content.appendChild(svg);
     main.appendChild(content);
     container.appendChild(main);
-    console.log(plusIcon);
 
     return main;
 };

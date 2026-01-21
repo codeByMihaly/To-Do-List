@@ -10,7 +10,6 @@ body {
     display: grid;
     grid-template-columns: minmax(200px, 0.5fr) 4fr;
     grid-template-rows: 200px 10px 1fr 60px;
-    height: 100vh;
 }
 
 .header-class {
@@ -33,6 +32,7 @@ body {
     position: relative;
     background-color: rgb(238, 232, 172);  
     border-right: 2px solid rgba(133, 133, 104, 0.301);
+    min-height: 100vh;
 }
 
 .main-class {
@@ -42,7 +42,7 @@ body {
 
 .content {
     display: flex;
-    gap: 2em;
+    flex-wrap: wrap;
 }
 
 .content-box {
@@ -50,7 +50,7 @@ body {
     min-width: 16em;
     min-height: 10em;
     max-width: 25em;
-    margin: 1em;
+    margin: 2em 6em 1em 2em;
     padding: 1em;
     background-color:rgba(238, 232, 172, 0.342);
     transition: all 0.2s ease-in;  

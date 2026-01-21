@@ -5,7 +5,7 @@ import createSidebar from "./sidebar.js";
 import createMain from "./main.js";
 import toDoForm from "./add-to-do-form.js";
 import addToDo from "./create-new-to-do.js";
-import { priorityFormToggle, toDoFormX } from "./to-do-features.js";
+import { priorityFormToggle, toDoFormX, openAddNewToDo } from "./to-do-features.js";
 
 createHeader();
 createSidebar();
@@ -15,3 +15,4 @@ toDoForm();
 priorityFormToggle(); 
 toDoFormX();         
 addToDo();        
+openAddNewToDo();
