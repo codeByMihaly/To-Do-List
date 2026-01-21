@@ -63,6 +63,21 @@ body {
     background-color:rgb(238, 232, 172);  
 }
 
+.plus-svg-icon svg {
+  fill: rgb(238, 232, 172);
+  width: 60px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 2em;
+  cursor: pointer; 
+  transition: all 0.2s ease-in;
+}
+
+.plus-svg-icon svg:hover {
+  fill: rgb(201, 193, 113);
+}
+
 .upper-to-do-part {
     display: flex;
     justify-content: space-between;
@@ -152,3 +167,4 @@ fieldset {
     border: none;
     cursor: pointer;
 }
+
