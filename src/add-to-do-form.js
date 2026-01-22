@@ -20,16 +20,16 @@ const toDoForm = () => {
     form.innerHTML = `
     <fieldset>Your new To Do:</fieldset>
 
-    <label class="labels" for="title">Title:
-    <input id="title" type="text" name="Title" required> </label>
+    <label id="title-label" class="labels" for="title">Title:*
+    <input id="title" type="text" name="Title" required></label>
 
-    <label class="labels" for="description">Description:
-    <input id="description" type="text" name="Description" required> </label>
+    <label id="description-label" class="labels" for="description">Description:*
+    <textarea id="description" type="text" name="Description" required></textarea>
 
-    <label class="labels" for="due-date">Due-date: 
-    <input id="due-date" type="date" name="Due-date" required> </label>
+    <label id="due-date-label" class="labels" for="due-date">Due-date:*
+    <input id="due-date" type="date" name="Due-date" required></label>
 
-    <label class="labels" for="priority-form">Priority color:
+    <label id="priority-form-label" class="labels" for="priority-form">Priority color:
     <input id="priority-form" type="button" name="Priority" value="${priorityFormToggle()}"> </label>
 
     <button type="submit" id="to-do-add-btn">Add</button>

@@ -13,6 +13,14 @@ const addToDo = () => {
         const toDoDueDate = document.getElementById("due-date");
         const toDoPriority = document.getElementById("priority-form");
 
+        console.log("title" , toDoTitle.value);
+        console.log("toDoDescription" , toDoDescription.value);
+        console.log("toDoDueDate" , toDoDueDate.value);
+
+        if (!toDoTitle.value === "" || !toDoDescription.value === "" || toDoDueDate.value === "") {
+            return;
+        }
+
         const contentContainer = document.querySelector(".content");
         if (!contentContainer) return;
 
@@ -24,6 +32,16 @@ const addToDo = () => {
         );
 
         contentContainer.appendChild(newCard);
+
+            toDoTitle.value = "",
+            toDoDescription.value = "",
+            toDoDueDate.value = "",
+            toDoPriority.style.backgroundColor = "green";
+
+            const formLayout = document.querySelector(".form-layout");
+            if(formLayout) {
+                formLayout.style.display = "none";
+            }
     });
 };
 

@@ -61,5 +61,24 @@ export const createToDoCard = (title, description, dueDate, priority) => {
         }
     });
 
+    doneBtn.addEventListener("mouseenter", () => {
+        if (doneBtn.textContent === "In progress") {
+            doneBtn.style.backgroundColor = "rgba(0, 0, 0, 0.658)";
+        } else if (doneBtn.textContent === "Done") {
+            doneBtn.style.backgroundColor = "green";
+            doneBtn.style.opacity = "0.7";
+        }
+    })
+
+    doneBtn.addEventListener("mouseleave", () => {
+        if (doneBtn.textContent === "In progress") {
+            doneBtn.style.backgroundColor = "black";
+            doneBtn.style.opacity = "";
+        } else if (doneBtn.textContent === "Done") {
+            doneBtn.style.backgroundColor = "green";
+            doneBtn.style.opacity = "";
+        }
+    });
+
     return card;
 };

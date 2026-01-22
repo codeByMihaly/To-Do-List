@@ -13,6 +13,6 @@ createMain();
 
 toDoForm();         
 priorityFormToggle(); 
-toDoFormX();         
+toDoFormX();    
+openAddNewToDo();     
 addToDo();        
-openAddNewToDo();

@@ -31,7 +31,7 @@ export const toDoFormX = () => {
 
    if (formLayout && formX) {
       formX.addEventListener("click", () => {
-      formLayout.remove();
+      formLayout.style.display = "none";
       });
     }
 }
@@ -42,7 +42,10 @@ export const openAddNewToDo = () => {
 
     if(openToDo) {
         openToDo.addEventListener("click", () => {
-            toDoForm();
+            const formLayout = document.querySelector(".form-layout");
+            if(formLayout) {
+                formLayout.style.display = "";
+            }
         })
     }
 
