@@ -50,7 +50,7 @@ body {
     min-width: 16em;
     min-height: 10em;
     max-width: 25em;
-    margin: 2em 6em 1em 2em;
+    margin: 2em;
     padding: 1em;
     background-color:rgba(238, 232, 172, 0.342);
     transition: all 0.2s ease-in;  
@@ -133,8 +133,7 @@ body {
 
 .form-layout {
     width: 40%;
-    height: auto;          
-    min-height: 40%;    
+    height: auto;             
     max-height: 80vh; 
     background-color: rgb(255, 255, 255);
     position: absolute;
@@ -143,6 +142,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    backdrop-filter: blur(4px);
 }
 
 .form-content {

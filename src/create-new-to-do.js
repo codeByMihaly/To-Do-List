@@ -1,11 +1,15 @@
 import { createToDoCard } from "./create-card.js";
 
 const addToDo = () => {
+    const form = document.querySelector("form");
     const toDoAddBtn = document.getElementById("to-do-add-btn");
 
     if (!toDoAddBtn) return;
 
     toDoAddBtn.addEventListener("click", (e) => {
+        if (!form.checkValidity()) {
+            return;
+        }
         e.preventDefault();
 
         const toDoTitle = document.getElementById("title");
@@ -13,11 +17,7 @@ const addToDo = () => {
         const toDoDueDate = document.getElementById("due-date");
         const toDoPriority = document.getElementById("priority-form");
 
-        console.log("title" , toDoTitle.value);
-        console.log("toDoDescription" , toDoDescription.value);
-        console.log("toDoDueDate" , toDoDueDate.value);
-
-        if (!toDoTitle.value === "" || !toDoDescription.value === "" || toDoDueDate.value === "") {
+        if (toDoTitle.value.trim() === "" || toDoDescription.value.trim() === "" || toDoDueDate.value.trim() === "") {
             return;
         }
 

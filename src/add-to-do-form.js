@@ -6,6 +6,7 @@ const toDoForm = () => {
 
     const formLayout = document.createElement("div");
     formLayout.classList.add("form-layout");
+    formLayout.style.display = "none";
 
     const formContent = document.createElement("div");
     formContent.classList.add("form-content");
