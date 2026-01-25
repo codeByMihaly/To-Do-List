@@ -1,3 +1,6 @@
+import { loadData, setActiveProjects } from "./data-store.js";
+import { renderHeaderProjectName, renderProjectToDos } from "./render";
+
 const createSidebar = () => {
 
     const container = document.getElementById("container");
@@ -5,33 +8,66 @@ const createSidebar = () => {
     const sidebar = document.createElement("section");
     sidebar.classList.add("sidebar-class");
 
-    const divToDo = document.createElement("div");
-    divToDo.classList.add("to-do-section");
-    divToDo.textContent = "To-do section";
+    const projectSection = document.createElement("div");
+    projectSection.classList.add("project-section")
+    projectSection.textContent = "Projects";
 
-    const toDo = document.createElement("div");
-    toDo.classList.add("to-do-class");
-    toDo.textContent = "some todo";
+    const projectList = document.createElement("div");
+    projectList.id = "project-list"
 
-    const divProject = document.createElement("div");
-    divProject.classList.add("project-section");
-    divProject.textContent = "Project section";
-
-    const project = document.createElement("div");
-    project.classList.add("project-class");
-    project.textContent = "some project";
+    projectSection.appendChild(projectList);
 
     const footerText = document.createElement("p");
     footerText.id = "footer-text";
     footerText.textContent = "CodeByMihaly";
 
-    divToDo.append(toDo);
-    divProject.append(project);
-
-    sidebar.append(divToDo, divProject, footerText);
+    sidebar.append(projectSection, footerText);
     container.appendChild(sidebar);
+
+    renderSidebarProjects();
 
     return sidebar;
 }
 
 export default createSidebar;
+
+
+export const renderSidebarProjects = () => {
+    const data = loadData();
+    const projectList = document.getElementById("project-list");
+
+    if (!projectList)
+        return;
+
+    projectList.innerHTML = "";
+    
+    const projectNames = Object.keys(data.projects);
+
+    if (projectNames.length === 0) {
+        projectList.innerHTML = `
+            <p style="opacity: 0.6; margin-top: 1em;"> No projects yet </p>
+        `;
+        return;
+    }
+
+    projectNames.forEach(name => {
+        const item = document.createElement("div");
+        item.classList.add("project-class");
+        item.textContent = name;
+
+        if (data.activeProjects === name) {
+            item.style.fontWeight = "800";
+            item.style.textDecoration = "underline";
+        }
+
+        item.addEventListener("click", () => {
+            const updated = setActiveProjects(data, name);
+
+            renderHeaderProjectName(name);
+            renderProjectToDos(updated.projects[name]);
+            renderSidebarProjects();
+        });
+
+        projectList.appendChild(item);
+    });
+};
