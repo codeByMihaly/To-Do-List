@@ -23,4 +23,3 @@ const createMain = () => {
 };
 
 export default createMain;
-console.log(plusIcon);

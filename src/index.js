@@ -12,10 +12,10 @@ createHeader();
 createSidebar();
 createMain();
 
-toDoForm();         
+toDoForm();     
+addToDo();         
 priorityFormToggle(); 
 toDoFormX();    
-openAddNewToDo();     
-addToDo();        
+openAddNewToDo();        
 
 renderStartState();

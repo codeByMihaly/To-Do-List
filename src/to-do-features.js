@@ -1,4 +1,3 @@
-import toDoForm from "./add-to-do-form.js";
 import { loadData } from "./data-store.js";
 
 export const priorityFormToggle = (color = "green") => {
@@ -9,7 +8,7 @@ export const priorityFormToggle = (color = "green") => {
         priorityForm.value = "";
         priorityForm.style.backgroundColor = color;
 
-        priorityForm.addEventListener("click", () => {
+        priorityForm.onclick = () => {
             if(priorityForm.style.backgroundColor === "green") {
                 priorityForm.value = "";
                 priorityForm.style.backgroundColor = "orange";
@@ -20,7 +19,7 @@ export const priorityFormToggle = (color = "green") => {
                 priorityForm.value = "";
                 priorityForm.style.backgroundColor = "green";
             };
-        });
+        };
     };
 
 }
@@ -38,10 +37,19 @@ export const toDoFormX = () => {
 }
 
 export const openAddNewToDo = () => {
+    
     const openToDo = document.getElementById("plus-svg-icon-id");
 
     if (openToDo) {
         openToDo.addEventListener("click", () => {
+
+            const form = document.querySelector("form"); 
+            if (form) form.reset(); 
+            
+            const priority = document.getElementById("priority-form"); 
+            if (priority) 
+                priority.style.backgroundColor = "green";
+
             const formLayout = document.querySelector(".form-layout");
             if(!formLayout)
                 return;
@@ -67,8 +75,14 @@ export const setFormMode = (mode = "todo") => {
     const selectLabel = document.getElementById("select-project-label");
     const selectProject = document.getElementById("select-project");
 
-    const titleLabel = document.getElementById("title-input");
+    const titleLabel = document.getElementById("title-label");
     const titleInput = document.getElementById("title-input");
+
+    const descriptionLabel = document.getElementById("description-label"); 
+    const descriptionInput = document.getElementById("description"); 
+    
+    const dueDateInput = document.getElementById("due-date"); 
+    const priorityInput = document.getElementById("priority-form");
 
     const data = loadData();
 
@@ -82,6 +96,14 @@ export const setFormMode = (mode = "todo") => {
         titleLabel.style.display = "none";
         titleInput.style.display = "none";
 
+        descriptionLabel.style.display = "block"; 
+        descriptionInput.style.display = "block"; 
+
+        dueDateInput.disabled = true; 
+        dueDateInput.style.opacity = "0.4";
+        priorityInput.style.display = "none";
+        priorityInput.disabled = true;
+
         return;
     }
 
@@ -94,6 +116,15 @@ export const setFormMode = (mode = "todo") => {
 
     titleLabel.style.display = "block";
     titleInput.style.display = "block";
+
+    descriptionLabel.style.display = "block"; 
+    descriptionInput.style.display = "block"; 
+    
+    dueDateInput.style.display = "block"; 
+    dueDateInput.disabled = false;
+     dueDateInput.style.opacity = "1";
+    priorityInput.style.display = "block";
+    priorityInput.disabled = false;
 
     selectProject.innerHTML = "";
 
@@ -109,9 +140,14 @@ export const setFormMode = (mode = "todo") => {
     newOpt.textContent = "New project";
     selectProject.appendChild(newOpt);
 
-    selectProject.addEventListener("change", () => {
-        if (selectProject.value === "__new__") {
-            setFormMode("project");
-        }
-    });
+    selectProject.onchange = () => { 
+        if (selectProject.value === "__new__") { 
+            
+            const form = document.querySelector("form"); 
+            if (form) 
+                form.reset(); 
+            
+            setFormMode("project"); 
+        } 
+    };
 };

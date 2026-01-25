@@ -1,48 +1,94 @@
-import { createToDoCard } from "./create-card.js";
+import { loadData, saveData, setActiveProjects } from "./data-store.js";
+import { renderSidebarProjects } from "./sidebar.js";
+import { renderHeaderProjectName, renderProjectToDos } from "./render.js";
 
 const addToDo = () => {
     const form = document.querySelector("form");
-    const toDoAddBtn = document.getElementById("to-do-add-btn");
+    if (!form) return;
 
-    if (!toDoAddBtn) return;
-
-    toDoAddBtn.addEventListener("click", (e) => {
-        if (!form.checkValidity()) {
-            return;
-        }
+    form.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        const toDoTitle = document.getElementById("title");
-        const toDoDescription = document.getElementById("description");
-        const toDoDueDate = document.getElementById("due-date");
-        const toDoPriority = document.getElementById("priority-form");
-
-        if (toDoTitle.value.trim() === "" || toDoDescription.value.trim() === "" || toDoDueDate.value.trim() === "") {
+        if (!form.checkValidity()) {
+            form.reportValidity();
             return;
         }
 
-        const contentContainer = document.querySelector(".content");
-        if (!contentContainer) return;
+        const data = loadData();
 
-        const newCard = createToDoCard(
-            toDoTitle.value,
-            toDoDescription.value,
-            toDoDueDate.value,
-            toDoPriority.style.backgroundColor || "green"
-        );
+        const projectNameInput = document.getElementById("project-name-input");
+        const selectProject = document.getElementById("select-project");
 
-        contentContainer.appendChild(newCard);
+        const titleInput = document.getElementById("title-input");
+        const descriptionInput = document.getElementById("description");
+        const dueDateInput = document.getElementById("due-date");
+        const priorityInput = document.getElementById("priority-form");
 
-            toDoTitle.value = "",
-            toDoDescription.value = "",
-            toDoDueDate.value = "",
-            toDoPriority.style.backgroundColor = "green";
+        let activeProject = data.activeProjects;
 
-            const formLayout = document.querySelector(".form-layout");
-            if(formLayout) {
-                formLayout.style.display = "none";
-            }
+        if (projectNameInput.style.display === "block") {
+            const newProjectName = projectNameInput.value.trim();
+            const newProjectDesc = descriptionInput.value.trim();
+
+            if (!newProjectName) return;
+
+            data.projects[newProjectName] = {
+                description: newProjectDesc,
+                todos: []
+            };
+
+            activeProject = newProjectName;
+            data.activeProjects = newProjectName;
+
+            saveData(data);
+
+            renderSidebarProjects();
+            renderHeaderProjectName(newProjectName);
+            renderProjectToDos([]);
+
+            closeForm();
+            return;
+        }
+
+        const selectedProject = selectProject.value;
+        const title = titleInput.value.trim();
+        const description = descriptionInput.value.trim();
+        const dueDate = dueDateInput.value;
+        const priority = priorityInput.style.backgroundColor;
+
+        if (!selectedProject || !title) return;
+
+        const targetProject = selectedProject;
+        const todoObj = {
+            title,
+            description,
+            dueDate,
+            priority,
+            done: false
+        };
+
+        data.projects[targetProject].todos.push(todoObj);
+        data.activeProjects = targetProject;
+
+        saveData(data);
+
+        renderSidebarProjects();
+        renderHeaderProjectName(targetProject);
+        renderProjectToDos(data.projects[targetProject].todos);
+
+        closeForm();
     });
+};
+
+const closeForm = () => {
+    const formLayout = document.querySelector(".form-layout");
+    if (formLayout) formLayout.style.display = "none";
+
+    const form = document.querySelector("form");
+    if (form) form.reset();
+
+    const priority = document.getElementById("priority-form");
+    if (priority) priority.style.backgroundColor = "green";
 };
 
 export default addToDo;
