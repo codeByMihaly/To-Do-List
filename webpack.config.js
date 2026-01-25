@@ -31,11 +31,7 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: [
-          {
-            loader: 'raw-loader'
-          }
-        ]
+        type: "asset/source"
       },
       {
         test: /\.(png|jpg|jpeg|gif)$/i,

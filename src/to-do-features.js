@@ -1,4 +1,5 @@
 import toDoForm from "./add-to-do-form.js";
+import { loadData } from "./data-store.js";
 
 export const priorityFormToggle = (color = "green") => {
 
@@ -37,16 +38,80 @@ export const toDoFormX = () => {
 }
 
 export const openAddNewToDo = () => {
-
     const openToDo = document.getElementById("plus-svg-icon-id");
 
-    if(openToDo) {
+    if (openToDo) {
         openToDo.addEventListener("click", () => {
             const formLayout = document.querySelector(".form-layout");
-            if(formLayout) {
-                formLayout.style.display = "";
+            if(!formLayout)
+                return;
+            
+            const data = loadData();
+
+            if(Object.keys(data.projects).length === 0) {
+                setFormMode("project");
+            } else {
+                setFormMode("todo");
             }
+
+            formLayout.style.display = "";
         })
     }
-
 }
+
+
+export const setFormMode = (mode = "todo") => {
+    const projectNameLabel = document.getElementById("project-name-label");
+    const projectNameInput = document.getElementById("project-name-input");
+
+    const selectLabel = document.getElementById("select-project-label");
+    const selectProject = document.getElementById("select-project");
+
+    const titleLabel = document.getElementById("title-input");
+    const titleInput = document.getElementById("title-input");
+
+    const data = loadData();
+
+    if (mode === "project") {
+        projectNameLabel.style.display = "block";
+        projectNameInput.style.display = "block";
+
+        selectLabel.style.display = "none";
+        selectProject.style.display = "none";
+
+        titleLabel.style.display = "none";
+        titleInput.style.display = "none";
+
+        return;
+    }
+
+
+    projectNameLabel.style.display = "none";
+    projectNameInput.style.display = "none";
+
+    selectLabel.style.display = "block";
+    selectProject.style.display = "block";
+
+    titleLabel.style.display = "block";
+    titleInput.style.display = "block";
+
+    selectProject.innerHTML = "";
+
+    Object.keys(data.projects).forEach(name => {
+        const opt = document.createElement("option");
+        opt.value = name;
+        opt.textContent = name;
+        selectProject.appendChild(opt);
+    });
+
+    const newOpt = document.createElement("option");
+    newOpt.value = "__new__";
+    newOpt.textContent = "New project";
+    selectProject.appendChild(newOpt);
+
+    selectProject.addEventListener("change", () => {
+        if (selectProject.value === "__new__") {
+            setFormMode("project");
+        }
+    });
+};

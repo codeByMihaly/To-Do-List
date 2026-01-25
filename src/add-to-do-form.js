@@ -1,7 +1,6 @@
-import { priorityFormToggle } from "./to-do-features.js";
+import { loadData } from "./data-store.js";
 
 const toDoForm = () => {
-
     const container = document.getElementById("container");
 
     const formLayout = document.createElement("div");
@@ -12,39 +11,78 @@ const toDoForm = () => {
     formContent.classList.add("form-content");
 
     const formX = document.createElement("div");
-    formX.classList.add("form-to-do");
     formX.id = "form-x";
     formX.textContent = "X";
 
-    const form = document.createElement("form");
-    form.classList.add("form-to-do");
-    form.innerHTML = `
-    <fieldset>Your new To Do:</fieldset>
+    const fieldset = document.createElement("fieldset");
+    fieldset.textContent = "Add new";
 
-    <label id="title-label" class="labels" for="title">Title:*
-    <input id="title" type="text" name="Title" required></label>
+    const projectNameLabel = document.createElement("label");
+    projectNameLabel.textContent = "Project name:";
+    projectNameLabel.id = "project-name-label";
 
-    <label id="description-label" class="labels" for="description">Description:*
-    <textarea id="description" type="text" name="Description" required></textarea>
+    const projectNameInput = document.createElement("input");
+    projectNameInput.type = "text";
+    projectNameInput.id = "project-name-input";
 
-    <label id="due-date-label" class="labels" for="due-date">Due-date:*
-    <input id="due-date" type="date" name="Due-date" required></label>
+    const selectLabel = document.createElement("label");
+    selectLabel.textContent = "Select project:";
+    selectLabel.id = "select-project-label";
 
-    <label id="priority-form-label" class="labels" for="priority-form">Priority color:
-    <input id="priority-form" type="button" name="Priority" value="${priorityFormToggle()}"> </label>
+    const selectProject = document.createElement("select");
+    selectProject.id = "select-project";
 
-    <button type="submit" id="to-do-add-btn">Add</button>
-    `;
+    const titleLabel = document.createElement("label");
+    titleLabel.textContent = "Title:";
+    titleLabel.id = "title-label";
 
-    formContent.append(formX, form);
+    const titleInput = document.createElement("input");
+    titleInput.type = "text";
+    titleInput.id = "title-input";
+
+    const descLabel = document.createElement("label");
+    descLabel.textContent = "Description:";
+    const descInput = document.createElement("textarea");
+    descInput.id = "desc-input";
+
+    const dateLabel = document.createElement("label");
+    dateLabel.textContent = "Due date:";
+    const dateInput = document.createElement("input");
+    dateInput.type = "date";
+    dateInput.id = "date-input";
+
+    const priorityLabel = document.createElement("label");
+    priorityLabel.textContent = "Priority:";
+    const priorityInput = document.createElement("input");
+    priorityInput.type = "color";
+    priorityInput.id = "priority-input";
+
+    const addBtn = document.createElement("button");
+    addBtn.id = "to-do-add-btn";
+    addBtn.textContent = "Add";
+
+    formContent.append(
+        formX,
+        fieldset,
+        projectNameLabel,
+        projectNameInput,
+        selectLabel,
+        selectProject,
+        titleLabel,
+        titleInput,
+        descLabel,
+        descInput,
+        dateLabel,
+        dateInput,
+        priorityLabel,
+        priorityInput,
+        addBtn
+    );
 
     formLayout.appendChild(formContent);
-
     container.appendChild(formLayout);
 
     return formLayout;
-}
-
-
+};
 
 export default toDoForm;

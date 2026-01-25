@@ -14,11 +14,13 @@ const createMain = () => {
     svg.classList.add("plus-svg-icon");
     svg.innerHTML = plusIcon; 
 
-    content.appendChild(svg);
+    main.appendChild(svg);
     main.appendChild(content);
+
     container.appendChild(main);
 
     return main;
 };
 
 export default createMain;
+console.log(plusIcon);

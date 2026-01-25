@@ -1,5 +1,5 @@
 import { loadData, setActiveProjects } from "./data-store.js";
-import { renderHeaderProjectName, renderProjectToDos } from "./render";
+import { renderHeaderProjectName, renderProjectToDos } from "./render.js";
 
 const createSidebar = () => {
 

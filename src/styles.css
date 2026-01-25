@@ -63,19 +63,24 @@ body {
     background-color:rgb(238, 232, 172);  
 }
 
+.plus-svg-icon {
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    z-index: 9999;
+    cursor: pointer;
+}
+
 .plus-svg-icon svg {
   fill: rgb(238, 232, 172);
   width: 60px;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  margin: 2em;
-  cursor: pointer; 
+  height: 60px;
   transition: all 0.2s ease-in;
 }
 
 .plus-svg-icon svg:hover {
   fill: rgb(201, 193, 113);
+  transform: scale(1.05);
 }
 
 .upper-to-do-part {
