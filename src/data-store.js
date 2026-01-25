@@ -52,7 +52,7 @@ export const addProject = (data, name, description = "") => {
     return data;
 };
 
-export const  addToDoProject = (data, projectName, todo) => {
+export const  addToDoProject = (data, projectName, toDo) => {
     if (!projectName || !data.projects[projectName])
         return data;
 

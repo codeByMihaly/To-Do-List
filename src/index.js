@@ -6,6 +6,7 @@ import createMain from "./main.js";
 import toDoForm from "./add-to-do-form.js";
 import addToDo from "./create-new-to-do.js";
 import { priorityFormToggle, toDoFormX, openAddNewToDo } from "./to-do-features.js";
+import { renderStartState } from "./render.js";
 
 createHeader();
 createSidebar();
@@ -16,3 +17,5 @@ priorityFormToggle();
 toDoFormX();    
 openAddNewToDo();     
 addToDo();        
+
+renderStartState();
