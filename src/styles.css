@@ -203,7 +203,7 @@ fieldset {
 }
 
 #description:focus {
-    border-color: rgb(23, 9, 128);
+    border-color: rgb(238, 232, 172);
     outline: none;
     box-shadow: 0 0 0 2px rgba(23, 9, 128, 0.2);
 }
@@ -219,9 +219,13 @@ input:required:valid {
 }
 
 input:focus {
-    border-color: rgb(23, 9, 128);
+    border-color: rgb(238, 232, 172);
     outline: none;
     box-shadow: 0 0 0 2px rgba(23, 9, 128, 0.2);
+}
+
+#due-date {
+    cursor: pointer;
 }
 
 #priority-form {
