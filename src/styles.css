@@ -6,17 +6,21 @@ body {
     margin: 0;
 }
 
+html, body {
+    height: 100%;
+}
+
 #container {
     display: grid;
     grid-template-columns: minmax(200px, 0.5fr) 4fr;
-    grid-template-rows: 200px 10px 1fr 60px;
+    grid-template-rows: auto 10px 1fr 60px;
+    min-height: 100vh;
 }
 
 .header-class {
     grid-area: 1/1/2/3; 
     background-color: rgb(255, 255, 255);  
     border-bottom: 2px solid rgba(10, 10, 8, 0.301);
- 
 }
 
 .header-div {
@@ -25,6 +29,25 @@ body {
 
 #header-icon {
     width: 75px;
+    margin-left: 1em;
+    margin-bottom: 0.5em;
+}
+
+#username-id {
+    margin-left: 1em;
+    margin-bottom: 0.5em;
+}
+
+#header-h1-id {
+    text-align: center;
+}
+
+#header-project-description{
+    opacity: 0.6;
+    margin: 1em 1em 0em 1em;
+    font-size: 0.9rem;
+    text-align: center;
+    
 }
 
 .sidebar-class {
@@ -32,7 +55,31 @@ body {
     position: relative;
     background-color: rgb(238, 232, 172);  
     border-right: 2px solid rgba(133, 133, 104, 0.301);
-    min-height: 100vh;
+}
+
+#project-section {
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+#project-list {
+    word-break: break-word;
+    line-height: 1.5;
+    text-align: left;
+    font-size: 1rem;
+    margin: auto;
+    font-weight: 400;
+}
+
+.project-wrapper:hover{
+  opacity: 0.4;
+}
+
+.project-class {
+    margin: 0.5em 0.5em 0 1em;
 }
 
 .main-class {

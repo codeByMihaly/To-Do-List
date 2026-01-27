@@ -76,7 +76,7 @@ const addToDo = () => {
             return;
         }
 
-        // CSAK PROJEKT LÉTREHOZÁSA (amikor project mód van, select elrejtve)
+
         if (projectNameInput.style.display === "block" && selectProject.style.display === "none") {
             const newProjectName = projectNameInput.value.trim();
             const newProjectDesc = descriptionInput.value.trim();

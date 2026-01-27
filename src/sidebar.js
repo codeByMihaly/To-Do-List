@@ -9,6 +9,7 @@ const createSidebar = () => {
 
     const projectSection = document.createElement("div");
     projectSection.classList.add("project-section");
+    projectSection.id = "project-section";
     projectSection.textContent = "Projects";
 
     const projectList = document.createElement("div");
@@ -42,7 +43,7 @@ export const renderSidebarProjects = () => {
 
     if (projectNames.length === 0) {
         projectList.innerHTML = `
-            <p style="opacity: 0.6; margin-top: 1em;"> No projects yet </p>
+            <p style="opacity: 0.6; margin-top: 1em; text-align: center;"> No projects yet </p>
         `;
         return;
     }
@@ -58,6 +59,10 @@ export const renderSidebarProjects = () => {
         if (data.activeProjects === name) {
             item.style.fontWeight = "800";
             item.style.textDecoration = "underline";
+            item.style.cursor = "pointer";
+        } else {
+            item.style.fontStyle = "italic";
+            item.style.cursor = "pointer";
         }
 
         const del = document.createElement("span");

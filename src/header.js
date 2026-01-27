@@ -13,9 +13,6 @@ const createHeader = () => {
 
     const projectDesc = document.createElement("p");
     projectDesc.id = "header-project-description";
-    projectDesc.style.opacity = "0.6";
-    projectDesc.style.marginTop = "-1em";
-    projectDesc.style.fontSize = "0.9rem";
     projectDesc.textContent = "";
 
     const div = document.createElement("div");
