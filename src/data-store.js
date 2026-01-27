@@ -70,3 +70,16 @@ export const setActiveProjects = (data, projectName) => {
     saveData(data);
     return data;
 };
+
+export const deleteProject = (data, projectName) => {
+    if (!data.projects[projectName]) return data;
+
+    delete data.projects[projectName];
+
+    if (data.activeProjects === projectName) {
+        data.activeProjects = null;
+    }
+
+    saveData(data);
+    return data;
+};

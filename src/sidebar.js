@@ -1,5 +1,5 @@
-import { loadData, setActiveProjects } from "./data-store.js";
-import { renderHeaderProjectName, renderProjectToDos } from "./render.js";
+import { loadData, setActiveProjects, saveData } from "./data-store.js";
+import { renderHeaderProjectName, renderProjectToDos, renderEmptyToDo } from "./render.js";
 
 const createSidebar = () => {
 
@@ -9,11 +9,11 @@ const createSidebar = () => {
     sidebar.classList.add("sidebar-class");
 
     const projectSection = document.createElement("div");
-    projectSection.classList.add("project-section")
+    projectSection.classList.add("project-section");
     projectSection.textContent = "Projects";
 
     const projectList = document.createElement("div");
-    projectList.id = "project-list"
+    projectList.id = "project-list";
 
     projectSection.appendChild(projectList);
 
@@ -27,20 +27,18 @@ const createSidebar = () => {
     renderSidebarProjects();
 
     return sidebar;
-}
+};
 
 export default createSidebar;
-
 
 export const renderSidebarProjects = () => {
     const data = loadData();
     const projectList = document.getElementById("project-list");
 
-    if (!projectList)
-        return;
+    if (!projectList) return;
 
     projectList.innerHTML = "";
-    
+
     const projectNames = Object.keys(data.projects);
 
     if (projectNames.length === 0) {
@@ -51,6 +49,10 @@ export const renderSidebarProjects = () => {
     }
 
     projectNames.forEach(name => {
+
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("project-wrapper");
+
         const item = document.createElement("div");
         item.classList.add("project-class");
         item.textContent = name;
@@ -60,14 +62,54 @@ export const renderSidebarProjects = () => {
             item.style.textDecoration = "underline";
         }
 
-        item.addEventListener("click", () => {
-            const updated = setActiveProjects(data, name);
+        const del = document.createElement("span");
+        del.textContent = "✖";
+        del.classList.add("delete-project-btn");
 
+        item.addEventListener("click", () => {
+            setActiveProjects(loadData(), name);
+
+            const freshData = loadData();
             renderHeaderProjectName(name);
-            renderProjectToDos(updated.projects[name]);
+            renderProjectToDos(freshData.projects[name]);
             renderSidebarProjects();
         });
 
-        projectList.appendChild(item);
+        del.addEventListener("click", (e) => {
+            e.stopPropagation();
+
+            const data = loadData();
+
+            delete data.projects[name];
+
+            if (data.activeProjects === name) {
+                const remaining = Object.keys(data.projects);
+
+                if (remaining.length === 0) {
+                    data.activeProjects = null;
+                    saveData(data);
+                    renderSidebarProjects();
+                    renderEmptyToDo();
+                    return;
+                }
+
+                data.activeProjects = remaining[0];
+            }
+
+            saveData(data);
+
+            const fresh = loadData();
+            renderSidebarProjects();
+
+            if (fresh.activeProjects) {
+                renderHeaderProjectName(fresh.activeProjects);
+                renderProjectToDos(fresh.projects[fresh.activeProjects]);
+            } else {
+                renderEmptyToDo();
+            }
+        });
+
+        wrapper.append(item, del);
+        projectList.appendChild(wrapper);
     });
 };

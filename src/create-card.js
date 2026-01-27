@@ -1,6 +1,8 @@
+import { loadData, saveData } from "./data-store";
 import trash from "./icons/trash-can.png";
+import { renderProjectToDos } from "./render";
 
-export const createToDoCard = (title, description, dueDate, priority) => {
+export const createToDoCard = (title, description, dueDate, priority, done = false) => {
     const card = document.createElement("div");
     card.classList.add("content-box");
 
@@ -41,23 +43,64 @@ export const createToDoCard = (title, description, dueDate, priority) => {
 
     const doneBtn = document.createElement("button");
     doneBtn.id = "done-to-do-button";
-    doneBtn.textContent = "In progress";
+    
+    if (done) {
+        doneBtn.textContent = "Done";
+        doneBtn.style.backgroundColor = "green";
+    } else {
+        doneBtn.textContent = "In progress";
+        doneBtn.style.backgroundColor = "black";
+    }
 
     bottom.append(editBtn, doneBtn);
 
     card.append(upper, middle, bottom);
 
     deleteBtn.addEventListener("click", () => {
-        card.remove();
+        const data = loadData();
+
+        const project = data.projects[data.activeProjects];
+
+        const index = project.todos.findIndex(t => 
+            t.title === title &&
+            t.description === description &&
+            t.dueDate === dueDate &&
+            t.priority === priority
+        );
+
+        if (index !== -1) {
+            project.todos.splice(index, 1);
+            saveData(data);
+        }
+
+        renderProjectToDos(project);
     });
 
     doneBtn.addEventListener("click", () => {
-        if (doneBtn.textContent === "In progress") {
-            doneBtn.textContent = "Done";
-            doneBtn.style.backgroundColor = "green";
-        } else {
-            doneBtn.textContent = "In progress";
-            doneBtn.style.backgroundColor = "black";
+        const data = loadData();
+        const project = data.projects[data.activeProjects];
+
+        const index = project.todos.findIndex(t =>
+            t.title === title &&
+            t.description === description &&
+            t.dueDate === dueDate &&
+            t.priority === priority
+        );
+
+        if (index !== -1) {
+            project.todos[index].done = !project.todos[index].done;
+        
+            if (project.todos[index].done) {
+                doneBtn.textContent = "Done";
+                doneBtn.style.backgroundColor = "green";
+            } else {
+                doneBtn.textContent = "In progress";
+                doneBtn.style.backgroundColor = "black";
+            }
+
+            saveData(data);
+
+            renderProjectToDos(project);
         }
     });
 

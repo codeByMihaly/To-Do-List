@@ -131,6 +131,24 @@ body {
     background-color: rgba(0, 0, 0, 0.658);
 }
 
+.project-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 0.5em;
+}
+
+.delete-project-btn {
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+    margin-left: 0.5em;
+}
+
+.delete-project-btn:hover {
+    opacity: 0.7;
+}
+
 #footer-text {
     position: absolute;
     bottom: 0;

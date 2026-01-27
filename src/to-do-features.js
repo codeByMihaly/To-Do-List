@@ -95,6 +95,7 @@ export const setFormMode = (mode = "todo") => {
 
         titleLabel.style.display = "none";
         titleInput.style.display = "none";
+        titleInput.required = false;
 
         descriptionLabel.style.display = "block"; 
         descriptionInput.style.display = "block"; 
@@ -116,6 +117,7 @@ export const setFormMode = (mode = "todo") => {
 
     titleLabel.style.display = "block";
     titleInput.style.display = "block";
+    titleInput.required = true;
 
     descriptionLabel.style.display = "block"; 
     descriptionInput.style.display = "block"; 

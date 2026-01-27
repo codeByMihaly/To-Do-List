@@ -1,4 +1,5 @@
 import { loadData } from "./data-store.js";
+import { createToDoCard } from "./create-card.js";
 
 export const renderEmptyToDo = () => {
     const content = document.querySelector(".content");
@@ -48,12 +49,18 @@ export const renderProjectToDos = (project) => {
     }
 
     project.todos.forEach(todo => {
-        const div = document.createElement("div");
-        div.classList.add("content-box");
-        div.textContent = todo.title;
-        content.appendChild(div);
-    });
-};
+        const card = createToDoCard(
+            todo.title,
+            todo.description,
+            todo.dueDate,
+            todo.priority,
+            todo.done
+    );
+
+    content.appendChild(card);;
+});
+
+}
 
 export const renderStartState = () => {
     const data = loadData();

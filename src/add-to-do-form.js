@@ -23,7 +23,7 @@ const toDoForm = () => {
     const projectNameInput = document.createElement("input");
     projectNameInput.id = "project-name-input";
     projectNameInput.name = "projectName";
-    projectNameInput.required = true;
+    projectNameInput.required = false;
     projectNameInput.style.display = "none";
 
     const selectProjectLabel = document.createElement("label");

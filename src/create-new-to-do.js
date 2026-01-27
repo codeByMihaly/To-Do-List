@@ -44,7 +44,7 @@ const addToDo = () => {
 
             renderSidebarProjects();
             renderHeaderProjectName(newProjectName);
-            renderProjectToDos([]);
+            renderProjectToDos(data.projects[newProjectName]);
 
             closeForm();
             return;
@@ -74,7 +74,7 @@ const addToDo = () => {
 
         renderSidebarProjects();
         renderHeaderProjectName(targetProject);
-        renderProjectToDos(data.projects[targetProject].todos);
+        renderProjectToDos(data.projects[targetProject]);
 
         closeForm();
     });
