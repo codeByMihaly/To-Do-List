@@ -53,6 +53,7 @@ const toDoForm = () => {
     descriptionInput.required = true;
 
     const dueDateLabel = document.createElement("label");
+    dueDateLabel.id = "due-date-label";
     dueDateLabel.textContent = "Due date:";
 
     const dueDateInput = document.createElement("input");
@@ -62,6 +63,7 @@ const toDoForm = () => {
     dueDateInput.required = true;
 
     const priorityLabel = document.createElement("label");
+    priorityLabel.id = "priority-label";
     priorityLabel.textContent = "Priority:";
 
     const priorityInput = document.createElement("input");

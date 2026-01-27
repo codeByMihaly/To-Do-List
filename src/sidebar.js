@@ -2,7 +2,6 @@ import { loadData, setActiveProjects, saveData } from "./data-store.js";
 import { renderHeaderProjectName, renderProjectToDos, renderEmptyToDo } from "./render.js";
 
 const createSidebar = () => {
-
     const container = document.getElementById("container");
 
     const sidebar = document.createElement("section");
@@ -49,7 +48,6 @@ export const renderSidebarProjects = () => {
     }
 
     projectNames.forEach(name => {
-
         const wrapper = document.createElement("div");
         wrapper.classList.add("project-wrapper");
 
@@ -70,7 +68,7 @@ export const renderSidebarProjects = () => {
             setActiveProjects(loadData(), name);
 
             const freshData = loadData();
-            renderHeaderProjectName(name);
+            renderHeaderProjectName(name, freshData.projects[name].description);
             renderProjectToDos(freshData.projects[name]);
             renderSidebarProjects();
         });
@@ -79,20 +77,21 @@ export const renderSidebarProjects = () => {
             e.stopPropagation();
 
             const data = loadData();
-
             delete data.projects[name];
 
+            const remaining = Object.keys(data.projects);
+
+            if (remaining.length === 0) {
+                data.activeProjects = null;
+                saveData(data);
+
+                renderSidebarProjects();
+                renderHeaderProjectName("Your To Do List", "");
+                renderEmptyToDo();
+                return;
+            }
+
             if (data.activeProjects === name) {
-                const remaining = Object.keys(data.projects);
-
-                if (remaining.length === 0) {
-                    data.activeProjects = null;
-                    saveData(data);
-                    renderSidebarProjects();
-                    renderEmptyToDo();
-                    return;
-                }
-
                 data.activeProjects = remaining[0];
             }
 
@@ -101,12 +100,9 @@ export const renderSidebarProjects = () => {
             const fresh = loadData();
             renderSidebarProjects();
 
-            if (fresh.activeProjects) {
-                renderHeaderProjectName(fresh.activeProjects);
-                renderProjectToDos(fresh.projects[fresh.activeProjects]);
-            } else {
-                renderEmptyToDo();
-            }
+            const active = fresh.activeProjects;
+            renderHeaderProjectName(active, fresh.projects[active].description);
+            renderProjectToDos(fresh.projects[active]);
         });
 
         wrapper.append(item, del);

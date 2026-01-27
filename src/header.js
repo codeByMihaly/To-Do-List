@@ -11,6 +11,13 @@ const createHeader = () => {
     h1Header.id = "header-h1-id";
     h1Header.textContent = "Your To Do List";
 
+    const projectDesc = document.createElement("p");
+    projectDesc.id = "header-project-description";
+    projectDesc.style.opacity = "0.6";
+    projectDesc.style.marginTop = "-1em";
+    projectDesc.style.fontSize = "0.9rem";
+    projectDesc.textContent = "";
+
     const div = document.createElement("div");
     div.classList.add("header-div");
 
@@ -25,7 +32,7 @@ const createHeader = () => {
 
     div.append(headerIcon, username);
 
-    header.append(h1Header, div);
+    header.append(h1Header, projectDesc, div);
 
     container.appendChild(header);
 

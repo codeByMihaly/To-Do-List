@@ -1,6 +1,9 @@
-import { loadData, saveData, setActiveProjects } from "./data-store.js";
+import { loadData, saveData } from "./data-store.js";
 import { renderSidebarProjects } from "./sidebar.js";
 import { renderHeaderProjectName, renderProjectToDos } from "./render.js";
+
+let editMode = false;
+let editInfo = null;
 
 const addToDo = () => {
     const form = document.querySelector("form");
@@ -24,9 +27,57 @@ const addToDo = () => {
         const dueDateInput = document.getElementById("due-date");
         const priorityInput = document.getElementById("priority-form");
 
-        let activeProject = data.activeProjects;
+        if (editMode && editInfo) {
+            const { projectName: oldProject, index } = editInfo;
+            let newProject = selectProject.value;
 
-        if (projectNameInput.style.display === "block") {
+            if (newProject === "__new__") {
+                const newProjectName = projectNameInput.value.trim();
+                if (!newProjectName) return;
+
+                data.projects[newProjectName] = {
+                    description: "",
+                    todos: []
+                };
+
+                newProject = newProjectName;
+                data.activeProjects = newProjectName;
+            }
+
+            const updatedTodo = {
+                title: titleInput.value.trim(),
+                description: descriptionInput.value.trim(),
+                dueDate: dueDateInput.value,
+                priority: priorityInput.style.backgroundColor,
+                done: data.projects[oldProject].todos[index].done
+            };
+
+            if (oldProject === newProject) {
+                data.projects[oldProject].todos[index] = updatedTodo;
+            } else {
+                data.projects[oldProject].todos.splice(index, 1);
+                data.projects[newProject].todos.push(updatedTodo);
+                data.activeProjects = newProject;
+            }
+
+            saveData(data);
+
+            renderSidebarProjects();
+            renderHeaderProjectName(
+                data.activeProjects,
+                data.projects[data.activeProjects].description
+            );
+            renderProjectToDos(data.projects[data.activeProjects]);
+
+            editMode = false;
+            editInfo = null;
+
+            closeForm();
+            return;
+        }
+
+        // CSAK PROJEKT LÉTREHOZÁSA (amikor project mód van, select elrejtve)
+        if (projectNameInput.style.display === "block" && selectProject.style.display === "none") {
             const newProjectName = projectNameInput.value.trim();
             const newProjectDesc = descriptionInput.value.trim();
 
@@ -37,20 +88,35 @@ const addToDo = () => {
                 todos: []
             };
 
-            activeProject = newProjectName;
             data.activeProjects = newProjectName;
 
             saveData(data);
 
             renderSidebarProjects();
-            renderHeaderProjectName(newProjectName);
+            renderHeaderProjectName(newProjectName, newProjectDesc);
             renderProjectToDos(data.projects[newProjectName]);
 
             closeForm();
             return;
         }
 
-        const selectedProject = selectProject.value;
+        let selectedProject = selectProject.value;
+
+        if (selectedProject === "__new__") {
+            const newProjectName = projectNameInput.value.trim();
+            const newProjectDesc = descriptionInput.value.trim();
+
+            if (!newProjectName) return;
+
+            data.projects[newProjectName] = {
+                description: newProjectDesc,
+                todos: []
+            };
+
+            selectedProject = newProjectName;
+            data.activeProjects = newProjectName;
+        }
+
         const title = titleInput.value.trim();
         const description = descriptionInput.value.trim();
         const dueDate = dueDateInput.value;
@@ -58,7 +124,6 @@ const addToDo = () => {
 
         if (!selectedProject || !title) return;
 
-        const targetProject = selectedProject;
         const todoObj = {
             title,
             description,
@@ -67,14 +132,17 @@ const addToDo = () => {
             done: false
         };
 
-        data.projects[targetProject].todos.push(todoObj);
-        data.activeProjects = targetProject;
+        data.projects[selectedProject].todos.push(todoObj);
+        data.activeProjects = selectedProject;
 
         saveData(data);
 
         renderSidebarProjects();
-        renderHeaderProjectName(targetProject);
-        renderProjectToDos(data.projects[targetProject]);
+        renderHeaderProjectName(
+            selectedProject,
+            data.projects[selectedProject].description
+        );
+        renderProjectToDos(data.projects[selectedProject]);
 
         closeForm();
     });
@@ -89,6 +157,31 @@ const closeForm = () => {
 
     const priority = document.getElementById("priority-form");
     if (priority) priority.style.backgroundColor = "green";
+
+    document.getElementById("to-do-add-btn").textContent = "Add";
 };
 
 export default addToDo;
+
+export const startEditMode = (projectName, index, todo) => {
+    editMode = true;
+    editInfo = { projectName, index };
+
+    const formLayout = document.querySelector(".form-layout");
+    formLayout.style.display = "";
+
+    const form = document.querySelector("form");
+    form.reset();
+
+    import("./to-do-features.js").then(module => {
+        module.setFormMode("todo");
+
+        document.getElementById("select-project").value = projectName;
+        document.getElementById("title-input").value = todo.title;
+        document.getElementById("description").value = todo.description;
+        document.getElementById("due-date").value = todo.dueDate;
+        document.getElementById("priority-form").style.backgroundColor = todo.priority;
+
+        document.getElementById("to-do-add-btn").textContent = "Save";
+    });
+};

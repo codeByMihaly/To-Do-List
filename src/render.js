@@ -3,7 +3,7 @@ import { createToDoCard } from "./create-card.js";
 
 export const renderEmptyToDo = () => {
     const content = document.querySelector(".content");
-    if(!content) return;
+    if (!content) return;
 
     content.innerHTML = `
         <div style="
@@ -19,17 +19,17 @@ export const renderEmptyToDo = () => {
     `;
 };
 
-export const renderHeaderProjectName = (projectName) => {
+export const renderHeaderProjectName = (projectName, description = "") => {
     const headerTitle = document.getElementById("header-h1-id");
-    if(headerTitle) {
-        headerTitle.textContent = projectName;
-    }
+    const headerDesc = document.getElementById("header-project-description");
+
+    if (headerTitle) headerTitle.textContent = projectName;
+    if (headerDesc) headerDesc.textContent = description;
 };
 
 export const renderProjectToDos = (project) => {
     const content = document.querySelector(".content");
-    if (!content)
-        return;
+    if (!content) return;
 
     content.innerHTML = "";
 
@@ -40,7 +40,7 @@ export const renderProjectToDos = (project) => {
                 text-align: center;
                 margin-top: 5em;
                 font-size: 1.5rem;
-                color: rgba(0, 0, 0, 0.5);    
+                color: rgba(0, 0, 0, 0.5);
             ">
                 No tasks yet!
             </div>
@@ -55,23 +55,23 @@ export const renderProjectToDos = (project) => {
             todo.dueDate,
             todo.priority,
             todo.done
-    );
+        );
 
-    content.appendChild(card);;
-});
-
-}
+        content.appendChild(card);
+    });
+};
 
 export const renderStartState = () => {
     const data = loadData();
 
     if (!data.activeProjects || Object.keys(data.projects).length === 0) {
+        renderHeaderProjectName("Your To Do List", "");
         renderEmptyToDo();
         return;
     }
 
     const project = data.projects[data.activeProjects];
 
-    renderHeaderProjectName(data.activeProjects);
+    renderHeaderProjectName(data.activeProjects, project.description);
     renderProjectToDos(project);
 };

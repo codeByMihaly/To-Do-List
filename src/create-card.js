@@ -1,6 +1,7 @@
 import { loadData, saveData } from "./data-store";
 import trash from "./icons/trash-can.png";
 import { renderProjectToDos } from "./render";
+import { startEditMode } from "./create-new-to-do.js";
 
 export const createToDoCard = (title, description, dueDate, priority, done = false) => {
     const card = document.createElement("div");
@@ -41,9 +42,31 @@ export const createToDoCard = (title, description, dueDate, priority, done = fal
     editBtn.id = "edit-to-do-button";
     editBtn.textContent = "Edit";
 
+    editBtn.addEventListener("click", () => {
+        const data = loadData();
+        const projectName = data.activeProjects;
+        const project = data.projects[projectName];
+
+        const index = project.todos.findIndex(t =>
+            t.title === title &&
+            t.description === description &&
+            t.dueDate === dueDate &&
+            t.priority === priority
+        );
+
+        if (index === -1) return;
+
+        startEditMode(projectName, index, {
+            title,
+            description,
+            dueDate,
+            priority
+        });
+    });
+
     const doneBtn = document.createElement("button");
     doneBtn.id = "done-to-do-button";
-    
+
     if (done) {
         doneBtn.textContent = "Done";
         doneBtn.style.backgroundColor = "green";
@@ -58,10 +81,9 @@ export const createToDoCard = (title, description, dueDate, priority, done = fal
 
     deleteBtn.addEventListener("click", () => {
         const data = loadData();
-
         const project = data.projects[data.activeProjects];
 
-        const index = project.todos.findIndex(t => 
+        const index = project.todos.findIndex(t =>
             t.title === title &&
             t.description === description &&
             t.dueDate === dueDate &&
@@ -89,7 +111,7 @@ export const createToDoCard = (title, description, dueDate, priority, done = fal
 
         if (index !== -1) {
             project.todos[index].done = !project.todos[index].done;
-        
+
             if (project.todos[index].done) {
                 doneBtn.textContent = "Done";
                 doneBtn.style.backgroundColor = "green";
@@ -99,7 +121,6 @@ export const createToDoCard = (title, description, dueDate, priority, done = fal
             }
 
             saveData(data);
-
             renderProjectToDos(project);
         }
     });
@@ -111,7 +132,7 @@ export const createToDoCard = (title, description, dueDate, priority, done = fal
             doneBtn.style.backgroundColor = "green";
             doneBtn.style.opacity = "0.7";
         }
-    })
+    });
 
     doneBtn.addEventListener("mouseleave", () => {
         if (doneBtn.textContent === "In progress") {
