@@ -1,9 +1,14 @@
+// Basic data store (local storage).
+
 const storageKey = "toDo";
 
 const defaultData = () => ({
     projects: {},
     activeProjects: null,
+    username: "Type your name here!"
 });
+
+// Load data store.
 
 export const loadData = () => {
     const data = localStorage.getItem(storageKey);
@@ -25,9 +30,13 @@ export const loadData = () => {
     }
 };
 
+// Save data store.
+
 export const saveData = (data) => {
     localStorage.setItem(storageKey, JSON.stringify(data));
 };
+
+// Below is for functions that must be saved in local storage.
 
 export const addProject = (data, name, description = "") => {
     if (!name || name.trim() === "")

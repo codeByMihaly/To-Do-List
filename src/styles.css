@@ -1,3 +1,5 @@
+/* CSS for the entire webpage */
+
 *, *::after, *::before {
     box-sizing: border-box;
 }
@@ -7,6 +9,7 @@ body {
 }
 
 html, body {
+    font-family: "system-ui";
     height: 100%;
 }
 
@@ -33,9 +36,30 @@ html, body {
     margin-bottom: 0.5em;
 }
 
+#usernameDiv-id {
+    margin-left: 0.5em;
+    margin-bottom: 0.5em;
+}
+
 #username-id {
+    margin-left: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+#username-id-input {
     margin-left: 1em;
     margin-bottom: 0.5em;
+    padding: 0.2em;
+    border-radius: 2em;
+    outline: none;
+    border: 2px solid black;
+    font-weight: 800;
+    font-family: "system-ui";
+    font-size: 1rem;
+}
+
+#username-id-input:focus {
+    border-color: rgb(238, 232, 172)
 }
 
 #header-h1-id {
@@ -46,8 +70,7 @@ html, body {
     opacity: 0.6;
     margin: 1em 1em 0em 1em;
     font-size: 0.9rem;
-    text-align: center;
-    
+    text-align: center; 
 }
 
 .sidebar-class {
@@ -74,12 +97,29 @@ html, body {
     font-weight: 400;
 }
 
+.project-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 0.5em;
+}
+
 .project-wrapper:hover{
   opacity: 0.4;
 }
 
 .project-class {
     margin: 0.5em 0.5em 0 1em;
+}
+
+#footer-text {
+    text-align: center;
+    font-weight: 800;
+    opacity: 0.6;
+    width: 100%;
+    padding: 1em;
+    position: absolute;
+    bottom: 0;
 }
 
 .main-class {
@@ -133,12 +173,14 @@ html, body {
 .upper-to-do-part {
     display: flex;
     justify-content: space-between;
+    font-family: "system-ui";
 }
 
 #title-to-do,
 #description-to-do,
 #due-date-to-do {
     font-weight: 800;
+    font-family: "system-ui";
 }
 
 #priority-to-do {
@@ -158,6 +200,7 @@ html, body {
     display: flex;
     justify-content: end;
     gap: 1.5em;
+    font-family: "system-ui";
 }
 
 #edit-to-do-button,
@@ -168,21 +211,16 @@ html, body {
     padding: 0.2em 0.5em;
     border-radius: 10%;
     cursor: pointer;
+    font-family: "system-ui";
 }
 
 #edit-to-do-button {
     padding: 0.2em 0.7em;
+    
 }
 
 #edit-to-do-button:hover {
     background-color: rgba(0, 0, 0, 0.658);
-}
-
-.project-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 0.5em;
 }
 
 .delete-project-btn {
@@ -196,15 +234,10 @@ html, body {
     opacity: 0.7;
 }
 
-#footer-text {
-    position: absolute;
-    bottom: 0;
-}
-
 .form-layout {
     width: 40%;
     height: auto;             
-    max-height: 80vh; 
+    max-height: 95vh; 
     background-color: rgb(255, 255, 255);
     position: absolute;
     border: 4px solid rgba(133, 133, 104, 0.671);
@@ -213,12 +246,15 @@ html, body {
     left: 50%;
     transform: translate(-50%, -50%);
     backdrop-filter: blur(4px);
+    font-family: "system-ui";
 }
 
 .form-content {
     display: flex;
     flex-direction: column;
     margin: 2em;
+    gap: 0.3em;
+    font-family: "system-ui";
 }
 
 #form-x {
@@ -235,25 +271,32 @@ fieldset {
     font-weight: 800;
     text-decoration: underline;
     grid-area: 1/1/1/1;
+    font-family: "system-ui";
 }
 
 .form-to-do {
     display: flex;
     flex-direction: column;
+    font-family: "system-ui";
 }
 
-.labels {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    font-weight: 700;
-    gap: 0.5em;
-    margin-bottom: 0.5em;
+#select-project {
+    padding: 0.2em;
+    border-radius: 2em;
+    outline: none;
+    border: 2px solid black;
+    font-family: "system-ui";
+}
+
+#select-project:focus {
+    border-color: rgb(238, 232, 172);
+    box-shadow: 0 0 0 2px rgba(23, 9, 128, 0.2);
 }
 
 #description-label {
     flex-direction: column;
     align-items: flex-start;
+    font-family: "system-ui";
 }
 
 #description {
@@ -265,9 +308,11 @@ fieldset {
     padding: 0.3em;
     overflow: hidden;
     border-radius: 1em;
+    border: 2px solid black;
+    font-family: "system-ui";
 }
 
-#description:valid {
+#description:required:valid {
     border-color: #51cf66;
     background-color: #f8fff8;
 }
@@ -281,6 +326,7 @@ fieldset {
 input {
     padding: 0.2em;
     border-radius: 2em;
+    font-family: "system-ui";
 }
 
 input:required:valid {
@@ -296,10 +342,12 @@ input:focus {
 
 #due-date {
     cursor: pointer;
+    font-family: "system-ui";
 }
 
 #priority-form {
     width: 15px;
+    height: 15px;
     border-radius: 50%;
     border: none;
     cursor: pointer;
@@ -313,6 +361,7 @@ input:focus {
     border-radius: 10%;
     cursor: pointer;
     width: 20%;
+    font-family: "system-ui";
 }
 
 #to-do-add-btn:hover {

@@ -1,3 +1,5 @@
+// Index JS.
+
 import "./template.html";
 import "./styles.css";
 import createHeader from "./header.js";

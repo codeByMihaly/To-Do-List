@@ -1,8 +1,9 @@
+// This is the main side of the webpage. It contains the SVG add button aswell.
+
 import plusIcon from "./icons/plusIcon.svg";
 
 const createMain = () => {
     const container = document.getElementById("container");
-
     const main = document.createElement("main");
     main.classList.add("main-class");
 

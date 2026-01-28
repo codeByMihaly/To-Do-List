@@ -1,3 +1,6 @@
+// It's the JS about the to do cards that added to the main container.
+// There is some CSS rules and innerHTML.
+
 import { loadData, saveData } from "./data-store";
 import trash from "./icons/trash-can.png";
 import { renderProjectToDos } from "./render";
@@ -25,13 +28,13 @@ export const createToDoCard = (title, description, dueDate, priority, done = fal
     middle.classList.add("middle-to-do-part");
 
     const titleP = document.createElement("p");
-    titleP.textContent = `Title: ${title}`;
+    titleP.innerHTML = `<strong>Title:</strong> ${title}`;
 
     const descP = document.createElement("p");
-    descP.textContent = `Description: ${description}`;
+    descP.innerHTML = `<strong>Description:</strong> ${description}`;
 
     const dateP = document.createElement("p");
-    dateP.textContent = `Due Date: ${dueDate}`;
+    dateP.innerHTML = `<strong>Due Date:</strong> ${dueDate}`;
 
     middle.append(titleP, descP, dateP);
 
@@ -41,6 +44,8 @@ export const createToDoCard = (title, description, dueDate, priority, done = fal
     const editBtn = document.createElement("button");
     editBtn.id = "edit-to-do-button";
     editBtn.textContent = "Edit";
+
+    // Edit button event listener.
 
     editBtn.addEventListener("click", () => {
         const data = loadData();
@@ -64,6 +69,8 @@ export const createToDoCard = (title, description, dueDate, priority, done = fal
         });
     });
 
+    // Done button event listener.
+
     const doneBtn = document.createElement("button");
     doneBtn.id = "done-to-do-button";
 
@@ -78,6 +85,8 @@ export const createToDoCard = (title, description, dueDate, priority, done = fal
     bottom.append(editBtn, doneBtn);
 
     card.append(upper, middle, bottom);
+
+    // Delete button (trash icon) event listener.
 
     deleteBtn.addEventListener("click", () => {
         const data = loadData();
@@ -124,6 +133,8 @@ export const createToDoCard = (title, description, dueDate, priority, done = fal
             renderProjectToDos(project);
         }
     });
+
+    // Done button hover CSS rules.
 
     doneBtn.addEventListener("mouseenter", () => {
         if (doneBtn.textContent === "In progress") {

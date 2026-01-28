@@ -1,5 +1,10 @@
+// These are all for the sidebar JS. It is connected with the header title.
+// Inside there is the footer aswell.
+
 import { loadData, setActiveProjects, saveData } from "./data-store.js";
 import { renderHeaderProjectName, renderProjectToDos, renderEmptyToDo } from "./render.js";
+
+// Sidebar JS layout.
 
 const createSidebar = () => {
     const container = document.getElementById("container");
@@ -31,6 +36,8 @@ const createSidebar = () => {
 
 export default createSidebar;
 
+// The default message if there is no projects yet, with some CSS and delete function.
+
 export const renderSidebarProjects = () => {
     const data = loadData();
     const projectList = document.getElementById("project-list");
@@ -43,7 +50,11 @@ export const renderSidebarProjects = () => {
 
     if (projectNames.length === 0) {
         projectList.innerHTML = `
-            <p style="opacity: 0.6; margin-top: 1em; text-align: center;"> No projects yet </p>
+            <p style="opacity: 0.6; 
+            margin-top: 1em; text-align: 
+            center;"> 
+            No projects yet 
+            </p>
         `;
         return;
     }
@@ -64,6 +75,8 @@ export const renderSidebarProjects = () => {
             item.style.fontStyle = "italic";
             item.style.cursor = "pointer";
         }
+
+        // Delete function for the project side.
 
         const del = document.createElement("span");
         del.textContent = "✖";

@@ -1,9 +1,13 @@
+// Form rules.
+
 import { loadData, saveData } from "./data-store.js";
 import { renderSidebarProjects } from "./sidebar.js";
 import { renderHeaderProjectName, renderProjectToDos } from "./render.js";
 
 let editMode = false;
 let editInfo = null;
+
+// What you type in a form field it will be rendered at the container side. Inside of to do-s.
 
 const addToDo = () => {
     const form = document.querySelector("form");
@@ -36,7 +40,7 @@ const addToDo = () => {
                 if (!newProjectName) return;
 
                 data.projects[newProjectName] = {
-                    description: "",
+                    description: descriptionInput.value.trim(),
                     todos: []
                 };
 
@@ -75,7 +79,6 @@ const addToDo = () => {
             closeForm();
             return;
         }
-
 
         if (projectNameInput.style.display === "block" && selectProject.style.display === "none") {
             const newProjectName = projectNameInput.value.trim();
@@ -148,6 +151,8 @@ const addToDo = () => {
     });
 };
 
+// Form is closed when pressed a button.
+
 const closeForm = () => {
     const formLayout = document.querySelector(".form-layout");
     if (formLayout) formLayout.style.display = "none";
@@ -162,6 +167,8 @@ const closeForm = () => {
 };
 
 export default addToDo;
+
+// Edit mode is rendered to the to do-s.
 
 export const startEditMode = (projectName, index, todo) => {
     editMode = true;

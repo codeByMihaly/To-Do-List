@@ -1,4 +1,12 @@
+/* To do features:
+    - Priority color switch;
+    - Form exit;
+    - SVG Add button;
+    - Form mode (Project / To do);
+*/
 import { loadData } from "./data-store.js";
+
+// Priority color switch
 
 export const priorityFormToggle = (color = "green") => {
     const priorityForm = document.getElementById("priority-form");
@@ -19,6 +27,8 @@ export const priorityFormToggle = (color = "green") => {
     }
 };
 
+// Form exit
+
 export const toDoFormX = () => {
     const formLayout = document.querySelector(".form-layout");
     const formX = document.getElementById("form-x");
@@ -29,6 +39,8 @@ export const toDoFormX = () => {
         });
     }
 };
+
+// SVG Add button
 
 export const openAddNewToDo = () => {
     const openToDo = document.getElementById("plus-svg-icon-id");
@@ -57,6 +69,8 @@ export const openAddNewToDo = () => {
         });
     }
 };
+
+// Form mode (Project / To do)
 
 export const setFormMode = (mode = "todo") => {
     const projectNameLabel = document.getElementById("project-name-label");
@@ -150,3 +164,4 @@ export const setFormMode = (mode = "todo") => {
         }
     };
 };
+

@@ -1,5 +1,10 @@
+// The render side. It renders the webpage when it's started.
+// If there is no to do-s or projects this is the basic style of the webpage.
+
 import { loadData } from "./data-store.js";
 import { createToDoCard } from "./create-card.js";
+
+// If the to do is empty this is the style and writings.
 
 export const renderEmptyToDo = () => {
     const content = document.querySelector(".content");
@@ -26,6 +31,8 @@ export const renderHeaderProjectName = (projectName, description = "") => {
     if (headerTitle) headerTitle.textContent = projectName;
     if (headerDesc) headerDesc.textContent = description;
 };
+
+// If there is a project but not to do-s inside.
 
 export const renderProjectToDos = (project) => {
     const content = document.querySelector(".content");
@@ -60,6 +67,8 @@ export const renderProjectToDos = (project) => {
         content.appendChild(card);
     });
 };
+
+// It is the header basic title.
 
 export const renderStartState = () => {
     const data = loadData();
